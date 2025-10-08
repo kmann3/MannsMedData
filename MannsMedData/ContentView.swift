@@ -10,15 +10,15 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @State private var selection: String? = "Appointments & History"
+    @State private var selection: String? = nil
 
     var body: some View {
         NavigationSplitView {
             List(selection: $selection) {
-                NavigationLink("Appointments & History", destination: Text("Appointments & History"))
+                NavigationLink("Appointments & History", destination: AppointmentsView())
                 Text("Doctors")
                 Text("Medications")
-                Text("Surgeries")
+                Text("Medical Events")
                 Text("Family Medical History")
                 Text("Export")
                 Text("Settings")
