@@ -15,12 +15,19 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             List(selection: $selection) {
-                NavigationLink("Appointments & History", destination: AppointmentsView())
+                NavigationLink("Appointments & History", destination:
+                                AppointmentsView())
+
                 Text("Doctors")
+
                 Text("Medications")
-                Text("Medical Events")
+
+                NavigationLink("Medical Events", destination:
+                                MedicalEventsView())
                 Text("Family Medical History")
+
                 Text("Export")
+                
                 Text("Settings")
             }
 #if os(macOS)
