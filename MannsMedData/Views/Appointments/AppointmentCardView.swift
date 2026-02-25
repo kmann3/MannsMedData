@@ -27,9 +27,10 @@ struct AppointmentCardView: View {
             }
             Spacer()
             if self.isOld == false {
-                Label("Icon Only", systemImage: "square.and.arrow.up")
-                    .font(.title)
+                Label("Icon Only", systemImage: "archivebox")
+                    .font(.title3)
                     .labelStyle(.iconOnly)
+                    .accessibilityLabel("Archived appointment")
             }
         }
         .listRowBackground(isOld == false ? self.backColor : Color.gray.opacity(0.3))
