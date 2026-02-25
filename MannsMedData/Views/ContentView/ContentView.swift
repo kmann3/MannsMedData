@@ -18,17 +18,20 @@ struct ContentView: View {
                 NavigationLink("Appointments & History", destination:
                                 AppointmentsView())
 
-                Text("Doctors")
+                NavigationLink("Doctors", destination:
+                                DoctorsView())
 
-                Text("Medications")
+                NavigationLink("Medications", destination:
+                                MedicationsView())
 
                 NavigationLink("Medical Events", destination:
                                 MedicalEventsView())
-                Text("Family Medical History")
-
-                Text("Export")
                 
-                Text("Settings")
+                NavigationLink("Family Medical History", destination:
+                                FamilyMedicalHistoryView())
+                
+                NavigationLink("Settings", destination:
+                                SettingsView())
             }
 #if os(macOS)
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
