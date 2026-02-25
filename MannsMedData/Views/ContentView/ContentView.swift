@@ -19,7 +19,7 @@ struct ContentView: View {
                                 AppointmentsView())
 
                 NavigationLink("Doctors", destination:
-                                DoctorsView())
+                                DoctorsListView())
 
                 NavigationLink("Medications", destination:
                                 MedicationsView())
