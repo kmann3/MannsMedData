@@ -16,8 +16,8 @@ final class Doctor: CustomDebugStringConvertible, Identifiable, Hashable {
     public var name: String = ""
     public var doctorContactId: String = ""
     public var notes: String = ""
-//    @Relationship(deleteRule: .noAction, inverse: \Medication.doctor) public var medications: [Medication]? = nil
-    @Relationship(deleteRule: .nullify, inverse: \Appointment.doctor) public var appointments: [Appointment]? = nil
+    @Relationship(deleteRule: .noAction, inverse: \Medication.doctor) public var medications: [Medication] = []
+    @Relationship(deleteRule: .nullify, inverse: \Appointment.doctor) public var appointments: [Appointment] = []
     // Consider using MapKit to show location?
 
     public var createdOnUTC: Date = Date()
@@ -30,7 +30,7 @@ final class Doctor: CustomDebugStringConvertible, Identifiable, Hashable {
             - contactId: \(doctorContactId)
             - notes: \(notes)
             - Appointments:
-                - Count: \(appointments?.count.formatted() ?? "0")
+                - Count: \(appointments.count.formatted())
             - createdOnUTC: \(createdOnUTC.toDebugDate())
             """
     }
