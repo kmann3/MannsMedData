@@ -13,8 +13,11 @@ struct DoctorCardView: View {
     var backColor: Color {
         colorScheme == .dark ? Color.black : Color.white
     }
-    init(isOld: Bool = false) {
+    
+    var doctor: Doctor
+    init(isOld: Bool = false, doctor: Doctor) {
         self.isOld = isOld
+        self.doctor = doctor
     }
     var body: some View {
         HStack {
@@ -41,8 +44,8 @@ struct DoctorCardView: View {
 }
 
 #Preview("Not old") {
-    DoctorCardView(isOld: false)
+    DoctorCardView(isOld: false, doctor: Doctor(name: "Doctor Name"))
 }
 #Preview("Old") {
-    DoctorCardView(isOld: true)
+    DoctorCardView(isOld: true, doctor: Doctor(name: "Doctor Name"))
 }
