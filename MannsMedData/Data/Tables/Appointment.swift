@@ -10,7 +10,7 @@ import SwiftData
 import SwiftUI
 
 @Model
-final class Appointment: CustomDebugStringConvertible, Identifiable, Hashable {
+final class Appointment: Identifiable, Hashable {
 
     public var title: String = ""
     public var subTitle: String = ""
@@ -19,22 +19,7 @@ final class Appointment: CustomDebugStringConvertible, Identifiable, Hashable {
     public var notes: String = ""
     @Relationship(deleteRule: .nullify) public var doctor: Doctor? = nil
 
-    public var createdOnUTC: Date = Date()
-
-    public var debugDescription: String {
-        return """
-            Appointment:
-            - id: \(self.persistentModelID)
-            - title: \(title)
-            - subTitle: \(subTitle)
-            - date: \(date.toDebugDate())
-            - contactId: \(doctorContactId)
-            - Doctor:
-                - \(doctor != nil ? doctor!.name : "nil")
-            - notes: \(notes)
-            - createdOnUTC: \(createdOnUTC.toDebugDate())
-            """
-    }
+    public var createdOn: Date = Date()
 
     init(title: String = "",
          subTitle: String = "",
@@ -55,3 +40,23 @@ final class Appointment: CustomDebugStringConvertible, Identifiable, Hashable {
     {
     }
 }
+
+@MainActor
+extension Appointment: CustomDebugStringConvertible
+{
+    public var debugDescription: String {
+        return """
+            Appointment:
+            - id: \(self.persistentModelID)
+            - title: \(title)
+            - subTitle: \(subTitle)
+            - date: \(date.toDebugDate())
+            - contactId: \(doctorContactId)
+            - Doctor:
+                - \(doctor != nil ? doctor!.name : "nil")
+            - notes: \(notes)
+            - createdOn: \(createdOn.toDebugDate())
+            """
+    }
+}
+

@@ -10,30 +10,16 @@ import SwiftData
 import SwiftUI
 
 @Model
-final class MedicalEvents: CustomDebugStringConvertible, Identifiable, Hashable {
+final class MedicalEvent: Identifiable, Hashable {
 
     public var name: String = ""
     public var dateOfEvent: Date? = nil // A value of nil might mean they don't remember when it was
     public var isAccurate: Bool = false // This would be used if they, for example, say they had a heart attack in their 50's but don't remember when exactly.
-    public var notableLocation1: String = "" // This might be where the event happened
-    public var notableLocation2: String = "" // This might be the hospital they took you to.
+    public var notableLocation1: String = "" // This might be where the event happened; Use string? How to store locationi given from maps?
+    public var notableLocation2: String = "" // This might be the hospital they took you to; Use string? How to store locationi given from maps?
     public var notes: String = ""
 
-    public var createdOnUTC: Date = Date()
-
-    public var debugDescription: String {
-        return """
-            Doctor:
-            - id: \(self.persistentModelID)
-            - name: \(name)
-            - dateOfEvent: \(String(describing: dateOfEvent?.toDebugDate()))
-            - isAccurate: \(isAccurate)
-            - notableLocation1: \(notableLocation1)
-            - notableLocation2: \(notableLocation2)
-            - notes:  \(notes)
-            - createdOnUTC: \(createdOnUTC.toDebugDate())
-            """
-    }
+    public var createdOn: Date = Date()
 
     init(
         name: String = "",
@@ -53,5 +39,22 @@ final class MedicalEvents: CustomDebugStringConvertible, Identifiable, Hashable 
 
     init()
     {
+    }
+}
+
+@MainActor
+extension MedicalEvent : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return """
+            MedicalEvent:
+            - id: \(self.persistentModelID)
+            - name: \(name)
+            - dateOfEvent: \(String(describing: dateOfEvent?.toDebugDate()))
+            - isAccurate: \(isAccurate)
+            - notableLocation1: \(notableLocation1)
+            - notableLocation2: \(notableLocation2)
+            - notes:  \(notes)
+            - createdOn: \(createdOn.toDebugDate())
+            """
     }
 }

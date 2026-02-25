@@ -10,7 +10,7 @@ import SwiftData
 import SwiftUI
 
 @Model
-final class Medication: CustomDebugStringConvertible, Identifiable, Hashable {
+final class Medication: Identifiable, Hashable {
 
     public var name: String = ""
     public var dosage: String = "" // TODO: Create enum and fill this out properly, this will probably mean two fields - amount and measurement (e.g. g, mg, ml, etc - 50 in one field and milligram in another)
@@ -20,23 +20,7 @@ final class Medication: CustomDebugStringConvertible, Identifiable, Hashable {
     public var isDiscontinued: Bool = false
     @Relationship(deleteRule: .nullify) public var doctor: Doctor? = nil
 
-    public var createdOnUTC: Date = Date()
-
-    public var debugDescription: String {
-        return """
-            Appointment:
-            - id: \(self.persistentModelID)
-            - name: \(name)
-            - dosage: \(dosage)
-            - regularity: \(regularity)
-            - contactId: \(doctorContactId)
-            - Doctor:
-                - \(doctor != nil ? doctor!.name : "nil")
-            - notes: \(notes)
-            - isDiscontinued: \(isDiscontinued)
-            - createdOnUTC: \(createdOnUTC.toDebugDate())
-            """
-    }
+    public var createdOn: Date = Date()
 
     init(name: String,
          dosage: String = "",
@@ -57,5 +41,24 @@ final class Medication: CustomDebugStringConvertible, Identifiable, Hashable {
 
     init()
     {
+    }
+}
+
+@MainActor
+extension Medication : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return """
+            Medication:
+            - id: \(self.persistentModelID)
+            - name: \(name)
+            - dosage: \(dosage)
+            - regularity: \(regularity)
+            - contactId: \(doctorContactId)
+            - Doctor:
+                - \(doctor != nil ? doctor!.name : "nil")
+            - notes: \(notes)
+            - isDiscontinued: \(isDiscontinued)
+            - createdOn: \(createdOn.toDebugDate())
+            """
     }
 }

@@ -10,8 +10,7 @@ import SwiftData
 import SwiftUI
 
 @Model
-//final class Doctor: ObservableObject, CustomDebugStringConvertible, Identifiable, Hashable {
-final class Doctor: CustomDebugStringConvertible, Identifiable, Hashable {
+final class Doctor: Identifiable, Hashable {
 
     public var name: String = ""
     public var doctorContactId: String = ""
@@ -20,21 +19,8 @@ final class Doctor: CustomDebugStringConvertible, Identifiable, Hashable {
     @Relationship(deleteRule: .nullify, inverse: \Appointment.doctor) public var appointments: [Appointment] = []
     // Consider using MapKit to show location?
 
-    public var createdOnUTC: Date = Date()
-
-    public var debugDescription: String {
-        return """
-            Doctor:
-            - id: \(self.persistentModelID)
-            - name: \(name)
-            - contactId: \(doctorContactId)
-            - notes: \(notes)
-            - Appointments:
-                - Count: \(appointments.count.formatted())
-            - createdOnUTC: \(createdOnUTC.toDebugDate())
-            """
-    }
-
+    public var createdOn: Date = Date()
+    
     init(
         name: String = "",
         notes: String = ""
@@ -45,5 +31,21 @@ final class Doctor: CustomDebugStringConvertible, Identifiable, Hashable {
 
     init()
     {
+    }
+}
+
+@MainActor
+extension Doctor: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return """
+            Doctor:
+            - id: \(self.persistentModelID)
+            - name: \(name)
+            - contactId: \(doctorContactId)
+            - notes: \(notes)
+            - Appointments:
+                - Count: \(appointments.count.formatted())
+            - createdOn \(createdOn.toDebugDate())
+            """
     }
 }
