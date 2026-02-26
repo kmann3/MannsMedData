@@ -9,7 +9,13 @@ import SwiftUI
 
 struct DoctorsListView: View {
     var body: some View {
-        Text("DoctorsView")
+        List {
+            DoctorCardView(doctor: Doctor(name: "Foo"))
+            DoctorCardView(doctor: Doctor(name: "Foo"))
+            DoctorCardView(doctor: Doctor(name: "Foo"))
+            DoctorCardView(doctor: Doctor(name: "Foo"))
+            DoctorCardView(doctor: Doctor(name: "Foo"))
+        }
     }
 }
 

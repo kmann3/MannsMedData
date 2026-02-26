@@ -9,14 +9,13 @@ import SwiftUI
 
 struct DoctorCardView: View {
     @Environment(\.colorScheme) var colorScheme
-    var isOld: Bool
     var backColor: Color {
         colorScheme == .dark ? Color.black : Color.white
     }
     
     var doctor: Doctor
-    init(isOld: Bool = false, doctor: Doctor) {
-        self.isOld = isOld
+    init(doctor: Doctor) {
+
         self.doctor = doctor
     }
     var body: some View {
@@ -32,20 +31,20 @@ struct DoctorCardView: View {
                 Text("Notes")
             }
             Spacer()
-            if self.isOld == false {
+            if self.doctor.isArchived {
                 Label("Icon Only", systemImage: "archivebox")
                     .font(.title3)
                     .labelStyle(.iconOnly)
                     .accessibilityLabel("Archived doctor")
             }
         }
-        .listRowBackground(isOld == false ? self.backColor : Color.gray.opacity(0.3))
+        .listRowBackground(self.doctor.isArchived ? Color.gray.opacity(0.3) : self.backColor)
     }
 }
 
 #Preview("Not old") {
-    DoctorCardView(isOld: false, doctor: Doctor(name: "Doctor Name"))
+    DoctorCardView(doctor: Doctor(name: "Doctor Name"))
 }
 #Preview("Old") {
-    DoctorCardView(isOld: true, doctor: Doctor(name: "Doctor Name"))
+    DoctorCardView(doctor: Doctor(name: "Doctor Name", isArchived: true))
 }

@@ -14,7 +14,7 @@ final class MedicalEvent: Identifiable, Hashable {
 
     public var name: String = ""
     public var dateOfEvent: Date? = nil // A value of nil might mean they don't remember when it was
-    public var isAccurate: Bool = false // This would be used if they, for example, say they had a heart attack in their 50's but don't remember when exactly.
+    public var isDateAccurate: Bool = false // This would be used if they, for example, say they had a heart attack in their 50's but don't remember when exactly.
     public var notableLocation1: String = "" // This might be where the event happened; Use string? How to store locationi given from maps?
     public var notableLocation2: String = "" // This might be the hospital they took you to; Use string? How to store locationi given from maps?
     public var notes: String = ""
@@ -24,14 +24,14 @@ final class MedicalEvent: Identifiable, Hashable {
     init(
         name: String = "",
         dateOfEvent: Date? = nil,
-        isAccurate: Bool = false,
+        isDateAccurate: Bool = false,
         notableLocation1: String = "",
         notableLocation2: String = "",
         notes: String = ""
     ) {
         self.name = name
         self.dateOfEvent = dateOfEvent
-        self.isAccurate = isAccurate
+        self.isDateAccurate = isDateAccurate
         self.notableLocation1 = notableLocation1
         self.notableLocation2 = notableLocation2
         self.notes = notes
@@ -50,7 +50,7 @@ extension MedicalEvent : CustomDebugStringConvertible {
             - id: \(self.persistentModelID)
             - name: \(name)
             - dateOfEvent: \(String(describing: dateOfEvent?.toDebugDate()))
-            - isAccurate: \(isAccurate)
+            - isDateAccurate: \(isDateAccurate)
             - notableLocation1: \(notableLocation1)
             - notableLocation2: \(notableLocation2)
             - notes:  \(notes)

@@ -15,18 +15,21 @@ final class Doctor: Identifiable, Hashable {
     public var name: String = ""
     public var doctorContactId: String = ""
     public var notes: String = ""
+    public var isArchived: Bool = false
+    public var createdOn: Date = Date()
     @Relationship(deleteRule: .noAction, inverse: \Medication.doctor) public var medications: [Medication] = []
     @Relationship(deleteRule: .nullify, inverse: \Appointment.doctor) public var appointments: [Appointment] = []
+    
     // Consider using MapKit to show location?
-
-    public var createdOn: Date = Date()
     
     init(
         name: String = "",
-        notes: String = ""
+        notes: String = "",
+        isArchived: Bool = false
     ) {
         self.name = name
         self.notes = notes
+        self.isArchived = isArchived
     }
 
     init()
@@ -43,6 +46,7 @@ extension Doctor: CustomDebugStringConvertible {
             - name: \(name)
             - contactId: \(doctorContactId)
             - notes: \(notes)
+            - isArchived: \(isArchived)
             - Appointments:
                 - Count: \(appointments.count.formatted())
             - createdOn \(createdOn.toDebugDate())

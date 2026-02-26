@@ -18,6 +18,11 @@ final class Appointment: Identifiable, Hashable {
     public var doctorContactId: String = ""
     public var notes: String = ""
     @Relationship(deleteRule: .nullify) public var doctor: Doctor? = nil
+    
+    public var isArchived: Bool {
+          let cal = Calendar.current
+          return cal.startOfDay(for: date) < cal.startOfDay(for: Date())
+      }
 
     public var createdOn: Date = Date()
 
@@ -54,6 +59,7 @@ extension Appointment: CustomDebugStringConvertible
             - contactId: \(doctorContactId)
             - Doctor:
                 - \(doctor != nil ? doctor!.name : "nil")
+            - isArchived: \(isArchived)
             - notes: \(notes)
             - createdOn: \(createdOn.toDebugDate())
             """

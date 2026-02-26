@@ -16,13 +16,14 @@ struct AppointmentsView: View {
         futureAppointments.append(Appointment(title: "Cardio", date: Date()))
         futureAppointments.append(Appointment(title: "Cardio", date: Date()))
 
-        previousAppointments.append(Appointment(title: "Cardio", date: Date()))
-        previousAppointments.append(Appointment(title: "Cardio", date: Date()))
-        previousAppointments.append(Appointment(title: "Cardio", date: Date()))
-        previousAppointments.append(Appointment(title: "Cardio", date: Date()))
-        previousAppointments.append(Appointment(title: "Cardio", date: Date()))
-        previousAppointments.append(Appointment(title: "Cardio", date: Date()))
-        previousAppointments.append(Appointment(title: "Cardio", date: Date()))
+        let oldDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())
+        previousAppointments.append(Appointment(title: "Cardio", date: oldDate!))
+        previousAppointments.append(Appointment(title: "Cardio", date: oldDate!))
+        previousAppointments.append(Appointment(title: "Cardio", date: oldDate!))
+        previousAppointments.append(Appointment(title: "Cardio", date: oldDate!))
+        previousAppointments.append(Appointment(title: "Cardio", date: oldDate!))
+        previousAppointments.append(Appointment(title: "Cardio", date: oldDate!))
+        previousAppointments.append(Appointment(title: "Cardio", date: oldDate!))
 
     }
 
@@ -30,13 +31,13 @@ struct AppointmentsView: View {
         Section(header: Text("Upcoming").font(.largeTitle)) {
         List(futureAppointments) { appt in
 
-                AppointmentCardView()
+            AppointmentCardView(appointment: appt)
             }
         }
         Section(header: Text("History").font(.largeTitle)) {
             List(previousAppointments) { appt in
 
-                AppointmentCardView(isOld: true)
+                AppointmentCardView(appointment: appt)
             }
             
         }
