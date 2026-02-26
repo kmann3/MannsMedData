@@ -26,7 +26,7 @@ struct AppointmentCardView: View {
                 Text("November 5th, Thursday 5pm")
             }
             Spacer()
-            if self.isOld == false {
+            if self.isOld == true {
                 Label("Icon Only", systemImage: "archivebox")
                     .font(.title3)
                     .labelStyle(.iconOnly)
